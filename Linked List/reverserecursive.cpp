@@ -81,17 +81,13 @@ void deletion(node* &head,int val){
 }
 
 node* reverse(node* head){
-    node* prev=NULL;
-    node* curr=NULL;
-    node* nextptr;
-
-    while(curr!=NULL){
-        nextptr=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=nextptr;
+    if(head==NULL || head->next==NULL){
+        return head;
     }
-    return prev;
+    node* newhead= reverse(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return newhead;
 }
 
 
@@ -102,8 +98,7 @@ int main()
     insertAtTail(head, 2);
     insertAtTail(head, 3);
     displayll(head);
-        insertAtHead(head,4);
-reverse(head);
-displayll(head);
+node* newhead = reverse(head);
+displayll(newhead);
     return 0;
 }
